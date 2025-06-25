@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvtosMarket - Settings</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .settings-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .settings-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        
+        .settings-header h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .settings-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .settings-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 2rem;
+        }
+        
+        .settings-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .settings-tab:hover {
+            color: #333;
+        }
+        
+        .settings-tab.active {
+            color: #f39c12;
+            border-bottom: 2px solid #f39c12;
+        }
+        
+        .settings-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .settings-section.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .switch-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .switch-container label {
+            margin-right: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #f39c12;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .settings-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .save-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .save-btn:hover {
+            background-color: #e67e22;
+        }
+        
+        .save-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .notification {
+            display: none;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            color: white;
+            animation: slideIn 0.3s ease-in;
+        }
+        
+        .notification.success {
+            background-color: #2ecc71;
+        }
+        
+        .notification.error {
+            background-color: #e74c3c;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .settings-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .settings-tab {
+                padding: 0.75rem 1rem;
+            }
+            
+            .settings-footer {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="auth-navbar">
+        <div class="auth-navbar__logo">
+            <img src="/images/logo.png" alt="AvtosMarket Logo">
+            <span class="auth-navbar__brand">AvtosMarket</span>
+        </div>
+        <div class="auth-navbar__links">
+            <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+            <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+            <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+            <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+        </div>
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>Account Settings</h1>
+            <p>Manage your account preferences and settings</p>
+        </div>
+        
+        <div id="notification" class="notification"></div>
+        
+        <div class="settings-tabs">
+            <div class="settings-tab active" data-tab="profile">Profile</div>
+            <div class="settings-tab" data-tab="security">Security</div>
+            <div class="settings-tab" data-tab="notifications">Notifications</div>
+            <div class="settings-tab" data-tab="privacy">Privacy</div>
+        </div>
+        
+        <form id="settings-form">
+            <div id="profile-settings" class="settings-section active">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your email" readonly>
+                    <small class="form-hint">Email cannot be changed</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location">
+                        <option value="">Select location</option>
+                        <option value="Tbilisi">Tbilisi</option>
+                        <option value="Batumi">Batumi</option>
+                        <option value="Kutaisi">Kutaisi</option>
+                        <option value="Rustavi">Rustavi</option>
+                        <option value="Zugdidi">Zugdidi</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="security-settings" class="settings-section">
+                <div class="form-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" name="currentPassword" placeholder="Enter current password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="newPassword" placeholder="Enter new password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm new password">
+                </div>
+                
+                <div class="switch-container">
+                    <label for="two-factor">Enable Two-Factor Authentication</label>
+                    <label class="switch">
+                        <input type="checkbox" id="two-factor" name="twoFactor">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="notification-settings" class="settings-section">
+                <div class="switch-container">
+                    <label for="email-notifications">Email Notifications</label>
+                    <label class="switch">
+                        <input type="checkbox" id="email-notifications" name="emailNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="switch-container">
+                    <label for="product-updates">Product Updates</label>
+                    <label class="switch">
+                        <input type="checkbox" id="product-updates" name="productUpdates" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="switch-container">
+                    <label for="messages-notifications">New Messages</label>
+                    <label class="switch">
+                        <input type="checkbox" id="messages-notifications" name="messagesNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="switch-container">
+                    <label for="marketing-emails">Marketing Emails</label>
+                    <label class="switch">
+                        <input type="checkbox" id="marketing-emails" name="marketingEmails">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="privacy-settings" class="settings-section">
+                <div class="switch-container">
+                    <label for="profile-visibility">Profile Visibility</label>
+                    <label class="switch">
+                        <input type="checkbox" id="profile-visibility" name="profileVisibility" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <small class="form-hint">Allow other users to see your profile</small>
+                </div>
+                
+                <div class="switch-container">
+                    <label for="contact-info-visibility">Contact Information Visibility</label>
+                    <label class="switch">
+                        <input type="checkbox" id="contact-info-visibility" name="contactInfoVisibility">
+                        <span class="slider"></span>
+                    </label>
+                    <small class="form-hint">Show contact info to potential buyers</small>
+                </div>
+                
+                <div class="switch-container">
+                    <label for="activity-tracking">Activity Tracking</label>
+                    <label class="switch">
+                        <input type="checkbox" id="activity-tracking" name="activityTracking" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <small class="form-hint">Allow us to collect data to improve your experience</small>
+                </div>
+            </div>
+            
+            <div class="settings-footer">
+                <button type="submit" id="save-settings" class="save-btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AvtosMarket. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/settings.js"></script>
+</body>
+</html>

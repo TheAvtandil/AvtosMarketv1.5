@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvtosMarket - Add Product</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .form-header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-header p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #FFD700;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .image-upload {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            border-color: #FFD700;
+            background-color: rgba(255,215,0,0.05);
+        }
+        
+        .image-upload i {
+            font-size: 2rem;
+            color: #999;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .image-upload p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .image-upload .file-info {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .preview-item .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255,255,255,0.8);
+            color: #e74c3c;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: #FFD700;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #e6c200;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            background-color: #fdeaea;
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .price-currency-container {
+            display: flex;
+            width: 100%;
+        }
+        
+        .price-currency-container input {
+            flex: 1;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .price-currency-container select {
+            width: 120px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-left: none;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="auth-navbar">
+  <div class="auth-navbar__logo">
+    <img src="/images/logo.png" alt="AvtosMarket Logo">
+    <span class="auth-navbar__brand">AvtosMarket</span>
+  </div>
+  <div class="auth-navbar__links">
+    <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+    <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+    <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+    <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+  </div>
+</nav>
+
+
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Add New Product</h1>
+            <p>Fill in the details below to list your product</p>
+        </div>
+        
+        <div class="error-message" id="error-message">
+            Please fix the errors below.
+        </div>
+        
+        <form id="product-form">
+            <div class="form-group">
+                <label for="title">Product Title</label>
+                <input type="text" id="title" name="title" required placeholder="Enter a descriptive title">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="vehicles">Vehicles</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="services">Services</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="condition">Condition</label>
+                    <select id="condition" name="condition" required>
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
+                    <option value="Refurbished">Refurbished</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <div class="price-currency-container">
+                        <input type="number" id="price" name="price" required step="0.01" placeholder="Enter price">
+                        <select id="currency" name="currency">
+                            <option value="USD">$ (USD)</option>
+                            <option value="GEL">₾ (GEL)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required placeholder="e.g., Tbilisi, Georgia">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required placeholder="Provide a detailed description of your product"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Product Images</label>
+                <div class="image-upload" id="image-upload">
+                    <input type="file" id="images" name="images" multiple accept="image/*" style="display: none;">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop images here or click to browse</p>
+                    <div class="file-info">Upload up to 5 images (JPEG, PNG, max 5MB each)</div>
+                </div>
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="contact">Contact Information</label>
+                <input type="text" id="contact" name="contact" placeholder="Phone number or preferred contact method">
+            </div>
+            
+            <button type="submit" class="submit-btn">Add Product</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AvtosMarket. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+   <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const productForm = document.getElementById('product-form');
+    const errorMessage = document.getElementById('error-message');
+    const imageUpload = document.getElementById('image-upload');
+    const imagesInput = document.getElementById('images');
+    const imagePreview = document.getElementById('image-preview');
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        window.location.href = '/login?redirect=add-product';
+        return;
+    }
+
+    let loadingSpinner = null;
+    function showLoading() {
+        if (!loadingSpinner) {
+            loadingSpinner = document.createElement('div');
+            loadingSpinner.innerHTML = '<div style="text-align:center;margin:1rem 0;"><i class="fas fa-spinner fa-spin"></i> Uploading...</div>';
+            productForm.appendChild(loadingSpinner);
+        }
+    }
+    function hideLoading() {
+        if (loadingSpinner) {
+            loadingSpinner.remove();
+            loadingSpinner = null;
+        }
+    }
+
+    function showError(message) {
+        if (errorMessage) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            errorMessage.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 4000);
+        } else {
+            alert(message);
+        }
+    }
+
+    if (imageUpload && imagesInput) {
+        imageUpload.addEventListener('click', function() {
+            imagesInput.click();
+        });
+        imageUpload.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            imageUpload.style.borderColor = '#FFD700';
+            imageUpload.style.backgroundColor = 'rgba(255,215,0,0.05)';
+        });
+        imageUpload.addEventListener('dragleave', function() {
+            imageUpload.style.borderColor = '#ddd';
+            imageUpload.style.backgroundColor = 'transparent';
+        });
+        imageUpload.addEventListener('drop', function(e) {
+            e.preventDefault();
+            imageUpload.style.borderColor = '#ddd';
+            imageUpload.style.backgroundColor = 'transparent';
+            if (e.dataTransfer.files.length > 0) {
+                imagesInput.files = e.dataTransfer.files;
+                handleImagePreview(e.dataTransfer.files);
+            }
+        });
+    }
+    if (imagesInput) {
+        imagesInput.addEventListener('change', function() {
+            handleImagePreview(this.files);
+        });
+    }
+
+    function handleImagePreview(files) {
+        if (imagePreview) imagePreview.innerHTML = '';
+        if (files.length > 5) {
+            showError('You can upload a maximum of 5 images');
+            if (imagesInput) imagesInput.value = '';
+            return;
+        }
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!file.type.match('image/*')) {
+                showError('Only image files are allowed');
+                continue;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                showError('Image size should be less than 5MB');
+                continue;
+            }
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            const img = document.createElement('img');
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            previewItem.appendChild(img);
+            const removeBtn = document.createElement('div');
+            removeBtn.className = 'remove-image';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                previewItem.remove();
+            });
+            previewItem.appendChild(removeBtn);
+            imagePreview.appendChild(previewItem);
+        }
+    }
+
+    productForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const title = document.getElementById('title').value.trim();
+        const category = document.getElementById('category').value;
+        const condition = document.getElementById('condition').value;
+        const price = parseFloat(document.getElementById('price').value);
+        const currency = document.getElementById('currency').value;
+        const location = document.getElementById('location').value.trim();
+        const description = document.getElementById('description').value.trim();
+        const contact = document.getElementById('contact').value.trim();
+        const images = imagesInput.files;
+
+        if (!title || !category || !condition || !price || !location || !description) {
+            showError('Please fill all required fields');
+            return;
+        }
+        if (images.length > 5) {
+            showError('You can upload a maximum of 5 images');
+            return;
+        }
+
+        showLoading();
+
+        const cloudinaryUrls = [];
+        for (let i = 0; i < images.length; i++) {
+            const file = images[i];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'imagersas');
+            try {
+                const res = await fetch('https://api.cloudinary.com/v1_1/der76mpdi/image/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.secure_url) {
+                    cloudinaryUrls.push(data.secure_url);
+                } else {
+                    hideLoading();
+                    showError('Image upload failed');
+                    return;
+                }
+            } catch (err) {
+                hideLoading();
+                showError('Image upload failed');
+                return;
+            }
+        }
+
+        const productData = {
+            title, category, condition, price, currency, location, description, contact,
+            images: cloudinaryUrls
+        };
+        try {
+            const response = await fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': token
+                },
+                body: JSON.stringify(productData)
+            });
+            hideLoading();
+            if (response.ok) {
+                const data = await response.json();
+                alert('Product added successfully!');
+                window.location.href = `/products/${data._id}`;
+            } else {
+                const errorData = await response.json();
+                showError(errorData.msg || 'Failed to add product');
+            }
+        } catch (error) {
+            hideLoading();
+            showError('An error occurred. Please try again later.');
+        }
+    });
+});
+</script>
+
+</body>
+</html>

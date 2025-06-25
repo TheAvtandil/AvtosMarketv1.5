@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+</head>
+<body>
+    
+<nav class="auth-navbar">
+  <div class="auth-navbar__logo">
+    <img src="/images/logo.png" alt="AvtosMarket Logo">
+    <span class="auth-navbar__brand">AvtosMarket</span>
+  </div>
+  <div class="auth-navbar__links">
+    <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+    <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+    <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+    <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+  </div>
+</nav>
+
+    
+    <div class="cart-container">
+        
+        <h1>Your Cart</h1>
+        <div id="cart-items"></div>
+        <div id="cart-total"></div>
+          <div class="cart-items-list" id="cart-items-list"></div>
+          <div class="cart-summary" id="cart-summary"></div>
+        
+    
+    </div>
+    
+    <script src="/js/cart.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

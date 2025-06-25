@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Products - AvtosMarket</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      .my-products-container {
+        max-width: 1100px;
+        margin: 40px auto 60px auto;
+        padding: 0 16px;
+      }
+      .my-products-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+      .my-products-header h1 {
+        font-size: 2rem;
+        margin: 0;
+      }
+      .my-products-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+      .my-product-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        padding: 18px 18px 12px 18px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: box-shadow 0.2s;
+      }
+      .my-product-card:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+      }
+      .my-product-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        background: #f3f3f3;
+      }
+      .my-product-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0 0 6px 0;
+      }
+      .my-product-meta {
+        font-size: 0.97rem;
+        color: #666;
+        margin-bottom: 8px;
+      }
+      .my-product-actions {
+        margin-top: auto;
+        display: flex;
+        gap: 10px;
+      }
+      .my-product-actions button {
+        flex: 1;
+        padding: 7px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .edit-btn {
+        background: #1976d2;
+        color: #fff;
+      }
+      .edit-btn:hover {
+        background: #1256a3;
+      }
+      .delete-btn {
+        background: #e53935;
+        color: #fff;
+      }
+      .delete-btn:hover {
+        background: #b71c1c;
+      }
+      .no-products-message {
+        text-align: center;
+        color: #888;
+        font-size: 1.1rem;
+        margin-top: 40px;
+      }
+      .loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px 0;
+      }
+      .loading-spinner i {
+        font-size: 2.5rem;
+        color: #1976d2;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+</head>
+<body>
+    <nav class="auth-navbar">
+      <div class="auth-navbar__logo">
+        <img src="/images/logo.png" alt="AvtosMarket Logo">
+        <span class="auth-navbar__brand">AvtosMarket</span>
+      </div>
+      <div class="auth-navbar__links">
+        <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+        <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+        <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+        <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+      </div>
+    </nav>
+
+    <div class="my-products-container">
+      <div class="my-products-header">
+        <h1>My Products</h1>
+        <a href="/add-product" class="cta-button"><i class="fas fa-plus"></i> Add New Product</a>
+      </div>
+      <div id="my-products-list" class="my-products-list">
+      </div>
+      <div id="my-products-message" class="no-products-message" style="display:none;"></div>
+      <div id="my-products-loading" class="loading-spinner" style="display:none;">
+        <i class="fas fa-spinner"></i>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 AvtosMarket. All rights reserved.</p>
+    </footer>
+    <script src="/js/script.js"></script>
+    <script src="/js/my-products.js"></script>
+</body>
+</html>

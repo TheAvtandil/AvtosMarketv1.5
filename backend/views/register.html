@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvtosMarket - Register</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+<nav class="auth-navbar">
+  <div class="auth-navbar__logo">
+    <img src="/images/logo.png" alt="AvtosMarket Logo">
+    <span class="auth-navbar__brand">AvtosMarket</span>
+  </div>
+  <div class="auth-navbar__links">
+    <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+    <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+    <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+    <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+  </div>
+</nav>
+
+
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Create an Account</h1>
+            <p>Join AvtosMarket to buy and sell products</p>
+        </div>
+        
+        <div class="error-message" id="error-message">
+            Please fix the errors below.
+        </div>
+        
+        <form id="register-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <p class="password-requirements">
+                    Password must be at least 8 characters long and include a mixture of letters and numbers.
+                </p>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            
+            <div class="terms-checkbox">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">
+                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+            </div>
+            
+            <button type="submit" class="auth-btn">Create Account</button>
+        </form>
+        
+        <div class="form-divider">
+            <hr><span>OR</span><hr>
+        </div>
+        
+        <div class="social-login">
+            <button class="social-btn google-btn">
+                <i class="fab fa-google"></i> Sign up with Google
+            </button>
+        </div>
+        
+        <div class="social-login">
+            <button class="social-btn facebook-btn">
+                <i class="fab fa-facebook-f"></i> Sign up with Facebook
+            </button>
+        </div>
+        
+        <div class="auth-links">
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AvtosMarket. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('register-form');
+            const errorMessage = document.getElementById('error-message');
+            
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const termsAccepted = document.getElementById('terms').checked;
+                
+                if (!name || !email || !password || !confirmPassword) {
+                    showError('All fields are required');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    showError('Password must be at least 8 characters long');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('Passwords do not match');
+                    return;
+                }
+                
+                if (!termsAccepted) {
+                    showError('You must accept the Terms of Service and Privacy Policy');
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            password
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+      if (response.ok) {
+          localStorage.setItem('token', data.token);
+    
+            localStorage.setItem('user', JSON.stringify({
+                 name: name,
+                 email: email,
+                 id: data.user?.id || ''
+    }));
+    
+    window.location.href = '/';
+}
+               else {
+                        showError(data.msg || 'Registration failed. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showError('An error occurred. Please try again later.');
+                }
+            });
+            
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Social signup would be implemented with OAuth in a production environment.');
+                });
+            });
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.add('show');
+                
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

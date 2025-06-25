@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvtosMarket - Products</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<nav class="auth-navbar">
+  <div class="auth-navbar__logo">
+    <img src="/images/logo.png" alt="AvtosMarket Logo">
+    <span class="auth-navbar__brand">AvtosMarket</span>
+  </div>
+  <div class="auth-navbar__links">
+    <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+    <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+    <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+    <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+  </div>
+</nav>
+
+<section class="search-section">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for products...">
+        <button class="search-btn">Search</button>
+        <button class="filter-btn"><i class="fas fa-filter"></i> Filters</button>
+        <a href="/cart" class="cart-btn">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </a>
+    </div>
+</section>
+
+    <div class="content-container">
+<div class="filter-panel">
+    <h3>Filter Products <span class="close-filters"></span></h3>
+    <div class="filter-group">
+        <h3>Category</h3>
+        <div class="filter-options" id="category-filters">
+        </div>
+    </div>
+    <div class="filter-group">
+        <h3>Condition</h3>
+        <div class="filter-options" id="condition-filters">
+        </div>
+    </div>
+    <div class="filter-group">
+        <h3>Price Range</h3>
+        <div class="price-slider">
+            <input type="range" min="0" max="5000" value="2000" class="price-range">
+            <div class="price-values">
+                <span id="min-price">$0</span>
+                <span id="max-price">$5,000</span>
+            </div>
+        </div>
+    </div>
+    <div class="filter-group">
+        <h3>Location</h3>
+        <select id="location-filter">
+        </select>
+    </div>
+    <button class="apply-filters">Apply Filters</button>
+    <button class="clear-filters" style="margin-top: 0.5rem; background: #eee; color: #333;">Clear Filters</button>
+
+</div>
+
+
+        <div class="products-container">
+            <h2>All Products</h2>
+            <div class="products-grid" id="products-grid">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AvtosMarket. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

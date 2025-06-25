@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - AvtosMarket</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+
+.product-detail-section {
+  background: #f8f9fb;
+  padding: 40px 0 30px 0;
+}
+.product-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.product-detail-card {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  overflow: hidden;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to   { opacity: 1; transform: none;}
+}
+.product-image {
+  flex: 1 1 340px;
+  min-width: 280px;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px;
+}
+.product-image img {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  object-fit: contain;
+  background: #fff;
+}
+
+
+.product-info {
+  flex: 2 1 400px;
+  padding: 32px 28px 32px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.product-info h1 {
+  font-size: 2.1rem;
+  margin-bottom: 12px;
+  color: #222;
+  font-weight: 700;
+}
+.product-price {
+  font-size: 1.4rem;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.product-description {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+.product-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 0.98rem;
+  color: #666;
+  margin-bottom: 18px;
+}
+.product-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.contact-info {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.contact-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+}
+.contact-info p {
+  margin: 4px 0;
+  color: #444;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.loading, .error-message {
+  text-align: center;
+  color: #888;
+  padding: 30px 0;
+  font-size: 1.1rem;
+}
+.error-message {
+  color: #e74c3c;
+  background: #fdeaea;
+  border-radius: 6px;
+  padding: 18px 0;
+  margin: 18px 0;
+  font-weight: 500;
+}
+
+
+.similar-products-section {
+  background: #fff;
+  padding: 36px 0 40px 0;
+}
+.similar-products-section h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  color: #222;
+  margin-bottom: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+}
+.product-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  overflow: hidden;
+  width: 210px;
+  transition: transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
+}
+.product-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+}
+.product-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  background: #eaeaea;
+  display: block;
+}
+.product-card-info {
+  padding: 14px 16px 12px 16px;
+}
+.product-card-info h4 {
+  font-size: 1.08rem;
+  color: #222;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.product-card-info .product-price {
+  color: #000000;
+  font-size: 1.02rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  margin-top: 30px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 900px) {
+  .product-detail-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .product-image, .product-info {
+    padding: 22px 12px;
+  }
+  .product-info {
+    padding: 22px 12px 22px 12px;
+  }
+  .products-grid {
+    gap: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .product-detail-container {
+    padding: 0 0.5rem;
+  }
+  .product-detail-card {
+    border-radius: 8px;
+  }
+  .product-image img {
+    max-height: 180px;
+    border-radius: 6px;
+  }
+  .product-info h1 {
+    font-size: 1.3rem;
+  }
+  .similar-products-section h2 {
+    font-size: 1.2rem;
+  }
+  .product-card {
+    width: 98vw;
+    max-width: 320px;
+  }
+}
+
+  </style>
+</head>
+<body>
+<nav class="auth-navbar">
+  <div class="auth-navbar__logo">
+    <img src="/images/logo.png" alt="AvtosMarket Logo">
+    <span class="auth-navbar__brand">AvtosMarket</span>
+  </div>
+  <div class="auth-navbar__links">
+    <a href="/" title="Home"><i class="fas fa-home"></i> <span>Home</span></a>
+    <a href="/products" title="Products"><i class="fas fa-car"></i> <span>Products</span></a>
+    <a href="/login" class="auth-navbar__btn" title="Login"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+    <a href="/register" class="auth-navbar__btn" title="Register"><i class="fas fa-user-plus"></i> <span>Register</span></a>
+  </div>
+</nav>
+
+
+
+  <section class="product-detail-section">
+    <button id="add-to-cart-btn">
+  <i class="fas fa-cart-plus"></i> Add to Cart
+</button>
+
+    <div class="product-detail-container" id="product-detail">
+      <div class="loading">
+        <p>Loading product details...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="similar-products-section">
+    <h2>Similar Products</h2>
+    <div class="products-grid" id="similar-products">
+      <div class="loading">
+        <p>Loading similar products...</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 AvtosMarket. All rights reserved.</p>
+  </footer>
+<script src="/js/script.js"></script>
+<script src="/js/product-detail.js"></script>
+
+</body>
+</html>
